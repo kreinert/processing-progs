@@ -145,7 +145,7 @@ void keyPressed () {
           }
            if (i != 0) {
             movement=true;
-          } else if ( i == 0) {
+          } else  {
             movement=false;
           }
           i=0;
