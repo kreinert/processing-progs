@@ -86,188 +86,171 @@ void keyPressed () {
           temp++;
         }
         
-       
         // case 1: position of x-1 is not empty
         if (positions[x-1][y]!=0  ){
           if( positions[temp][y] == positions[x-1][y]){
             // if the position temp has the same value add it to the current and set temp to 0
             positions[x-1][y] *= 2;
             positions[temp][y]=0;
+  
             }
           else{
             // if the position temp has a different value move it to x and set temp to 0 unless it is x
             positions[x][y]=positions[temp][y];
             if ( temp > x)
               positions[temp][y]=0;
+   
           }
         }
         // case 2: position of x-1 is empty. Then  move temp to x-1
         else{
              positions[x-1][y]=positions[temp][y];
              positions[temp][y]=0;
+      
         }
           
       }
     }
   }
   
-        
-       /* if (positions[x][y]!=0  ) {
 
-          if (x >0 && positions[x-1][y]==0) {
-            i= i+1;
-          } else if ( x >0 && positions[x-1][y]!=0 && positions[x-1][y]==positions[x][y]) {
-            positions[x-1][y]=positions[x-1][y]*2;
-            positions[x][y]=0;
-          }
-          if ( x >1 && positions[x-2][y]==0) {
-            i= i+1;
-          } else if ( x >1 && positions[x-2][y]!=0 && positions[x-2][y]==positions[x][y]) {
-            positions[x-2][y]=positions[x-2][y]*2;
-            positions[x][y]=0;
-          }
-          if (x >2 && positions[x-3][y]==0) {
-            i= i+1;
-          } else if ( x >2 && positions[x-3][y]!=0 && positions[x-3][y]==positions[x][y]) {
-            positions[x-3][y]=positions[x-3][y]*2;
-            positions[x][y]=0;
-          }
-          positions[x-i][y]=positions[x][y];
-          if (i!=0) { 
-            positions[x][y]=0;
-          }
-          if (i != 0) {
-            movement=true;
-          } else if ( i == 0) {
-            movement=false;
-          }
-          i=0;
-        }
-      }
-    }
-  }
-*/
   if (keyCode == 39) {
-      
-    for (int x = 3; x > -1; x--) {
-      for (int y = 3; y > -1; y--) {
-
-
-        if (positions[x][y]!=0  ) {
-          if (x <3 && positions[x+1][y]==0) {
-            i= i+1;
-          } else if ( x <3 && positions[x+1][y]!=0 && positions[x+1][y]==positions[x][y]) {
-            positions[x+1][y]=positions[x+1][y]*2;
-            positions[x][y]=0;
-          }
-          if ( x <2 && positions[x+2][y]==0) {
-            i= i+1;
-          } else if ( x <2 && positions[x+2][y]!=0 && positions[x+2][y]==positions[x][y]) {
-            positions[x+2][y]=positions[x+2][y]*2;
-            positions[x][y]=0;
-          }
-          if (x<1 && positions[x+3][y]==0) {
-            i= i+1;
-          } else if ( x <1 && positions[x+3][y]!=0 && positions[x+3][y]==positions[x][y]) {
-            positions[x+3][y]=positions[x+3][y]*2;
-            positions[x][y]=0;
-          }
-          positions[x+i][y]=positions[x][y];
-          if (i!=0) { 
-            positions[x][y]=0;
-          }
-           if (i != 0) {
-            movement=true;
-          } else  {
-            movement=false;
-          }
-          i=0;
+    
+    
+     // iterate over last column
+    for (int y = 0; y < 4; y++) {
+      // check always the previous cell
+      for (int x = 2; x >= 0; x--) {
+        // find the next non-empty cell 
+        int temp=x;
+        while( positions[temp][y] == 0 && temp > 0){
+          temp--;
         }
+        
+        // case 1: position of x+1 is not empty
+        if (positions[x+1][y]!=0  ){
+          if( positions[temp][y] == positions[x+1][y]){
+            // if the position temp has the same value add it to the current and set temp to 0
+            positions[x+1][y] *= 2;
+            positions[temp][y]=0;
+
+            }
+          else{
+            // if the position temp has a different value move it to x and set temp to 0 unless it is x
+            positions[x][y]=positions[temp][y];
+            if ( temp < x)
+              positions[temp][y]=0;
+
+          }
+        }
+        // case 2: position of x-+ is empty. Then  move temp to x+1
+        else{
+             positions[x+1][y]=positions[temp][y];
+             positions[temp][y]=0;
+   
+        }
+          
       }
     }
+      
+
   }
   if (keyCode == 40) {
     
-    for (int x = 3; x > -1; x--) {
-      for (int y = 3; y > -1; y--) {
-
-
-        if (positions[x][y]!=0  ) {
-          if (y <3 && positions[x][y+1]==0) {
-            i= i+1;
-          } else if ( y <3 && positions[x][y+1]!=0 && positions[x][y+1]==positions[x][y]) {
-            positions[x][y+1]=positions[x][y+1]*2;
-            positions[x][y]=0;
-          }
-          if ( y <2 && positions[x][y+2]==0) {
-            i= i+1;
-          } else if ( y <2 && positions[x][y+2]!=0 && positions[x][y+2]==positions[x][y]) {
-            positions[x][y+2]=positions[x][y+2]*2;
-            positions[x][y]=0;
-          }
-          if (y<1 && positions[x][y+3]==0) {
-            i= i+1;
-          } else if ( y <1 && positions[x][y+3]!=0 && positions[x][y+3]==positions[x][y]) {
-            positions[x][y+3]=positions[x][y+3]*2;
-            positions[x][y]=0;
-          }
-          positions[x][y+i]=positions[x][y];
-          if (i!=0) { 
-            positions[x][y]=0;
-          }
-           if (i != 0) {
-            movement=true;
-          } else if ( i == 0) {
-            movement=false;
-          }
-          i=0;
+   // iterate over row column
+     for (int x = 0; x < 4; x++) {
+      // check always the next cell
+       for (int y = 2; y >= 0; y--) {
+        // find the next non-empty cell 
+        int temp=y;
+        while( positions[x][temp] == 0 && temp > 0){
+          temp--;
         }
+        
+        // case 1: position of y+1 is not empty
+        if (positions[x][y+1]!=0  ){
+          if( positions[x][temp] == positions[x][y+1]){
+            // if the position temp has the same value add it to the current and set temp to 0
+            positions[x][y+1] *= 2;
+            positions[x][temp]=0;
+ 
+            }
+          else{
+            // if the position temp has a different value move it to y and set temp to 0 unless it is y
+            positions[x][y]=positions[x][temp];
+            if ( temp < y)
+              positions[x][temp]=0;
+  
+          }
+        }
+        // case 2: position of x-1 is empty. Then  move temp to x-1
+        else{
+             positions[x][y+1]=positions[x][temp];
+             positions[x][temp]=0;
+
+        }
+          
       }
     }
   } 
   if (keyCode == 38) {
-   println("38");
-    for (int x = 0; x < 4; x++) {
-      for (int y = 0; y < 4; y++) {
-
-
-        if (positions[x][y]!=0  ) {
-
-          if (y >0 && positions[x][y-1]==0) {
-            i= i+1;
-          } else if ( y >0 && positions[x][y-1]!=0 && positions[x][y-1]==positions[x][y]) {
-            positions[x][y-1]=positions[x][y-1]*2;
-            positions[x][y]=0;
-          }
-          if ( y >1 && positions[x][y-2]==0) {
-            i= i+1;
-          } else if ( y >1 && positions[x][y-2]!=0 && positions[x][y-2]==positions[x][y]) {
-            positions[x][y-2]=positions[x][y-2]*2;
-            positions[x][y]=0;
-          }
-          if (y >2 && positions[x][y-3]==0) {
-            i= i+1;
-          } else if ( y >2 && positions[x][y-3]!=0 && positions[x][y-3]==positions[x][y]) {
-            positions[x][y-3]=positions[x][y-3]*2;
-            positions[x][y]=0;
-          }
-          positions[x][y-i]=positions[x][y];
-          if (i!=0) { 
-            positions[x][y]=0;
-          }
-          if (i != 0) {
-            movement=true;
-          } else if ( i == 0) {
-            movement=false;
-          }
-          i=0;
+  
+    // iterate over row column
+     for (int x = 0; x < 4; x++) {
+      // check always the next cell
+       for (int y = 1; y < 4; y++) {
+        // find the next non-empty cell 
+        int temp=y;
+        while( positions[x][temp] == 0 && temp < 3){
+          temp++;
         }
+        
+        // case 1: position of y-1 is not empty
+        if (positions[x][y-1]!=0  ){
+          if( positions[x][temp] == positions[x][y-1]){
+            // if the position temp has the same value add it to the current and set temp to 0
+            positions[x][y-1] *= 2;
+            positions[x][temp]=0;
+
+            }
+          else{
+            // if the position temp has a different value move it to y and set temp to 0 unless it is y
+            positions[x][y]=positions[x][temp];
+            if ( temp > y)
+              positions[x][temp]=0;
+
+          }
+        }
+        // case 2: position of x-1 is empty. Then  move temp to x-1
+        else{
+             positions[x][y-1]=positions[x][temp];
+             positions[x][temp]=0;
+ 
+        }
+          
       }
     }
+    
+    
   }
-    println(movement);
+    boolean newsquare=false;
+ 
+    for (int y = 0; y < 4; y++) 
+      for (int x = 0; x < 4; x++) 
+        if (positions[x][y]==0 && !newsquare){
+           positions[x][y]=3;
+           newsquare = true;
+           break;
+        }
+        
+        
+      println(movement);
+      println(newsquare);
+      
+      if(  !newsquare)
+            println("STOP");
 
-   if (keyCode == 37||keyCode ==38||keyCode ==39||keyCode ==40 && movement==true) {  
+  /* if (keyCode == 37||keyCode ==38||keyCode ==39||keyCode ==40 && movement==true) {  
     c = false; 
     while (c==false) {
       r=int(random(4));
@@ -276,7 +259,9 @@ void keyPressed () {
         positions [r][rr]=3;
       c=true;
     }
-  }
+  }*/
+  
+  
 }
 
 void drawSquare( int xloc, int yloc  ) {
